@@ -1,0 +1,104 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   6f.md — Design Tokens
+   static.6f.md/tokens.css
+
+   All variables namespaced --6f-* to avoid conflicts with
+   Tailwind v4 (@theme owns --color-*, --font-*, --text-*, etc.)
+
+   Import order: tokens.css → base.css → components.css
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+
+  /* ─── PRIMITIVE: GRAYSCALE ──────────────────────────────────────── */
+  /* Even hundreds only. Contrast ratios measured against #000000.     */
+  --6f-gray-0:    #000000;
+  --6f-gray-100:  #1a1a1a;
+  --6f-gray-200:  #333333;
+  --6f-gray-300:  #4d4d4d;
+  --6f-gray-400:  #666666;
+  --6f-gray-500:  #808080;  /* lum ~0.216 — AA only (5.7:1) — bg use only */
+  --6f-gray-600:  #999999;  /* lum ~0.329 — AAA (7.4:1)  ✓ */
+  --6f-gray-700:  #b3b3b3;  /* lum ~0.459 — AAA (10.2:1) ✓ */
+  --6f-gray-800:  #cccccc;  /* lum ~0.604 — AAA (13.5:1) ✓ */
+  --6f-gray-900:  #e6e6e6;  /* lum ~0.768 — AAA (17.7:1) ✓ */
+  --6f-gray-1000: #ffffff;  /* lum  1.000 — AAA (21:1)   ✓ */
+
+  /* ─── PRIMITIVE: RAINBOW ───────────────────────────────────────── */
+  /* All AAA (>=7:1) on #000000                                       */
+  --6f-red:    #ff8080;  /* lum ~0.372 — 8.3:1  ✓ */
+  --6f-orange: #ffaa66;  /* lum ~0.440 — 9.8:1  ✓ */
+  --6f-yellow: #e6d060;  /* lum ~0.560 — 12.4:1 ✓ */
+  --6f-lime:   #90c060;  /* lum ~0.380 — 8.5:1  ✓ */
+  --6f-green:  #60b87a;  /* lum ~0.330 — 7.5:1  ✓ */
+  --6f-teal:   #60b8aa;  /* lum ~0.352 — 7.9:1  ✓ */
+  --6f-cyan:   #60c8d8;  /* lum ~0.405 — 9.1:1  ✓ */
+  --6f-blue:   #80a8e8;  /* lum ~0.340 — 7.7:1  ✓ */
+  --6f-indigo: #9898e8;  /* lum ~0.310 — 7.0:1  ✓ */
+  --6f-violet: #b888e0;  /* lum ~0.315 — 7.1:1  ✓ */
+  --6f-pink:   #e880b0;  /* lum ~0.310 — 7.0:1  ✓ */
+  --6f-rose:   #f09090;  /* lum ~0.358 — 8.0:1  ✓ */
+
+  /* ─── SEMANTIC: SURFACES ───────────────────────────────────────── */
+  --6f-color-bg:            var(--6f-gray-0);
+  --6f-color-bg-raised:     var(--6f-gray-100);
+  --6f-color-bg-elevated:   var(--6f-gray-200);
+  --6f-color-bg-overlay:    var(--6f-gray-200);
+  --6f-color-border:        var(--6f-gray-200);
+  --6f-color-border-subtle: var(--6f-gray-100);
+
+  /* ─── SEMANTIC: TEXT ───────────────────────────────────────────── */
+  --6f-color-text:           var(--6f-gray-1000);  /* 21:1   ✓ AAA */
+  --6f-color-text-secondary: var(--6f-gray-900);   /* 17.7:1 ✓ AAA */
+  --6f-color-text-muted:     var(--6f-gray-800);   /* 13.5:1 ✓ AAA */
+  --6f-color-text-dim:       var(--6f-gray-700);   /* 10.2:1 ✓ AAA */
+  --6f-color-text-disabled:  var(--6f-gray-600);   /* 7.4:1  ✓ AAA */
+
+  /* ─── SEMANTIC: ACCENT ─────────────────────────────────────────── */
+  --6f-color-accent: var(--6f-gray-1000);  /* neutral by default; override per-project */
+
+  /* ─── SEMANTIC: STATUS ─────────────────────────────────────────── */
+  --6f-color-note:    var(--6f-gray-600);
+  --6f-color-success: var(--6f-green);
+  --6f-color-warning: var(--6f-yellow);
+  --6f-color-danger:  var(--6f-red);
+
+  /* ─── TYPOGRAPHY ───────────────────────────────────────────────── */
+  --6f-font-sans:  'IBM Plex Sans',  sans-serif;
+  --6f-font-serif: 'IBM Plex Serif', serif;
+  --6f-font-mono:  'IBM Plex Mono',  monospace;
+
+  --6f-text-xs:   0.75rem;
+  --6f-text-sm:   0.875rem;
+  --6f-text-base: 1rem;
+  --6f-text-lg:   1.125rem;
+  --6f-text-xl:   1.25rem;
+  --6f-text-2xl:  1.5rem;
+  --6f-text-3xl:  1.875rem;
+  --6f-text-4xl:  2.25rem;
+
+  --6f-leading-tight:  1.25;
+  --6f-leading-normal: 1.6;
+  --6f-leading-loose:  1.8;
+
+  --6f-tracking-tight:  -0.02em;
+  --6f-tracking-normal: 0;
+  --6f-tracking-wide:   0.06em;
+  --6f-tracking-wider:  0.12em;
+
+  /* ─── SPACING ──────────────────────────────────────────────────── */
+  --6f-space-1:  0.25rem;
+  --6f-space-2:  0.5rem;
+  --6f-space-3:  0.75rem;
+  --6f-space-4:  1rem;
+  --6f-space-6:  1.5rem;
+  --6f-space-8:  2rem;
+  --6f-space-12: 3rem;
+  --6f-space-16: 4rem;
+  --6f-space-24: 6rem;
+
+  /* ─── LAYOUT ───────────────────────────────────────────────────── */
+  --6f-measure:   68ch;
+  --6f-radius-sm: 2px;
+  --6f-radius:    3px;
+}
