@@ -25,6 +25,10 @@ html {
   line-height: var(--6f-leading-normal);
   -webkit-font-smoothing: antialiased;
   color-scheme: dark;
+  /* Visual Tweak: Justified alignment for balanced density */
+  text-align: justify;
+  hyphens: auto;
+  text-justify: inter-word;
 }
 
 body {
@@ -149,8 +153,18 @@ a {
 }
 
 a:hover { text-decoration-color: currentColor; }
-a:visited { color: var(--6f-violet); }
+
+/* Visual Tweak: Force visited states to maintain base coloring */
+a:visited { color: var(--6f-color-accent); }
 a:active { color: var(--6f-orange); }
+
+/* Accessibility: High-visibility focus ring */
+a:focus-visible {
+  outline: 2px solid var(--6f-color-accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+  text-decoration: none;
+}
 
 
 /* ═══════════════════════════════════════════════════════════════════════
