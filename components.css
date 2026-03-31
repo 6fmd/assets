@@ -1060,6 +1060,7 @@ footer p {
    UTILITY
    ═══════════════════════════════════════════════════════════════════════ */
 
+.type-stack { display: flex; flex-direction: column; gap: var(--6f-space-6); }
 .gap-sm { gap: var(--6f-space-3); }
 .gap-md { gap: var(--6f-space-6); }
 .mt-4 { margin-top: var(--6f-space-4); }
