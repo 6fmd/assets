@@ -46,6 +46,8 @@
 }
 
 .nav-links a:hover { color: var(--6f-color-text); }
+
+/* Visual Tweak: Maintain consistency for visited links in nav */
 .nav-links a:visited { color: var(--6f-color-text-muted); }
 
 
@@ -122,10 +124,11 @@ button, .btn {
 }
 .btn-danger:hover { background: color-mix(in srgb, var(--6f-color-danger) 5%, transparent); border-color: var(--6f-color-danger); }
 
+/* Accessibility Patch: Replace opacity with hardened contrast values */
 .btn-disabled {
   background: var(--6f-color-bg-elevated);
-  color: var(--6f-color-text-disabled);
-  border: 1px solid var(--6f-color-border-subtle);
+  color: var(--6f-gray-500);
+  border: 1px solid var(--6f-gray-300);
   padding: var(--6f-space-3) var(--6f-space-6);
   cursor: not-allowed;
   pointer-events: none;
@@ -334,9 +337,11 @@ input[type="radio"]:checked::after {
   transform: translate(-50%, -50%);
 }
 
+/* Accessibility Patch: Hard contrast for custom disabled controls */
 input[type="checkbox"]:disabled,
 input[type="radio"]:disabled {
-  opacity: 0.4;
+  background: var(--6f-color-bg-elevated);
+  border-color: var(--6f-gray-300);
   cursor: not-allowed;
 }
 
@@ -429,16 +434,19 @@ input[type="range"]::-moz-range-thumb {
 
 /* ─── Disabled ───────────────────────────────────────────────────────── */
 
+/* Accessibility Patch: Removed opacity in favor of direct color overrides */
 input:disabled, textarea:disabled, select:disabled {
-  opacity: 0.5;
+  background: var(--6f-color-bg-raised);
+  border-color: var(--6f-gray-300);
+  color: var(--6f-gray-500);
   cursor: not-allowed;
 }
 
-/* dim labels and parent containers for disabled inputs */
+/* Accessibility Patch: Hard color for labels to maintain contrast */
 .form-field:has(:disabled) label,
 .check-group label:has(:disabled),
 .toggle:has(:disabled) {
-  opacity: 0.5;
+  color: var(--6f-gray-500);
   cursor: not-allowed;
 }
 
@@ -870,7 +878,7 @@ input:disabled, textarea:disabled, select:disabled {
 
 
 /* ═══════════════════════════════════════════════════════════════════════
-   TOOLTIP (CSS-only)
+   TOOLTIP (Accessibility Patched)
    ═══════════════════════════════════════════════════════════════════════ */
 
 .tooltip {
@@ -879,6 +887,7 @@ input:disabled, textarea:disabled, select:disabled {
   text-decoration: underline dotted;
   text-underline-offset: 0.15em;
   color: var(--6f-color-text-secondary);
+  display: inline-block;
 }
 
 .tooltip::after {
@@ -886,7 +895,7 @@ input:disabled, textarea:disabled, select:disabled {
   position: absolute;
   bottom: calc(100% + 6px);
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%) translateY(4px);
   font-family: var(--6f-font-mono);
   font-size: var(--6f-text-xs);
   white-space: nowrap;
@@ -897,10 +906,16 @@ input:disabled, textarea:disabled, select:disabled {
   border-radius: var(--6f-radius);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.15s;
+  transition: all 0.15s ease;
+  z-index: 100;
 }
 
-.tooltip:hover::after { opacity: 1; }
+/* Reveal on both Hover AND Keyboard Focus */
+.tooltip:hover::after,
+.tooltip:focus-visible::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
 
 
 /* ═══════════════════════════════════════════════════════════════════════
@@ -1099,25 +1114,22 @@ footer p {
   .form-row { flex-direction: column; }
   .form-stack { max-width: 100%; }
 
-  /* tabs — horizontal scroll (hidden scrollbar) */
-  .tabs {
+  /* Accessibility Patch: Removed scrollbar hiding for tabs/breadcrumbs */
+  .tabs, .breadcrumbs {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    scrollbar-width: thin; 
+    -ms-overflow-style: auto;
+    padding-bottom: var(--6f-space-2);
   }
-  .tabs::-webkit-scrollbar { display: none; }
+  
+  .tabs::-webkit-scrollbar, 
+  .breadcrumbs::-webkit-scrollbar { 
+    display: block; 
+    height: 4px;
+  }
+  
   .tabs a { white-space: nowrap; padding: var(--6f-space-3) var(--6f-space-4); }
-
-  /* breadcrumbs — horizontal scroll (hidden scrollbar) */
-  .breadcrumbs {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    flex-wrap: nowrap;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .breadcrumbs::-webkit-scrollbar { display: none; }
 
   /* pagination */
   .pagination { flex-wrap: wrap; }
